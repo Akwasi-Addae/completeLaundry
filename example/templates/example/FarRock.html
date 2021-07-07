@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title> Far Rockaway Laundry </title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/test.css' %}">
+
+    <script>
+        function currentStatus(){
+        var stat = document.getElementById("status");
+        var d = new Date();
+        var n = d.getUTCHours();
+
+        if (23 >= n-5 || n > 7){
+          stat.innerHTML = "OPEN";
+        }else{
+          stat.innerHTML = "CLOSED";
+        }
+      }
+    </script>
+
+  </head>
+
+  <body onload="currentStatus()">
+      <div class="head" style="background-image:url(/static/farrockimage.jpg)"></div>
+
+      <div class="headText">
+        <h1 style="color:white; font-weight:bold">Tub & Tumble</h1>
+        <p style="color:white; font-weight:bold">15, 25-15 Seagirt Blvd, Far Rockaway, NY 11691</p>
+        <p id = "status" style="color:white; font-weight:bold"></p>
+      </div>
+
+      <div class="topnav">
+        <a class="active" href="{% url 'post_html'%}">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <input type="text" placeholder="Search..">
+      </div>
+
+      <div class="sideInfo" style="float:right; border: 1px solid rgba(0,0,0,.125); border-radius:.4rem">
+      <div class="schedule" style="height:150px">
+        <div class="topSide" style="padding:10px;background-color:#F8F8FF">
+          <p style="color:purple">TODAY</p>
+          <h2><strong>Opening Hours</strong></h2>
+        </div>
+        <div class="Monday" style="padding:10px;border:1px solid white">
+          <p style="float:right;">7AM-12PM</p>
+          <p><strong>Monday</strong></p>
+        </div>
+        <div class="Tuesday" style="padding:10px">
+          <p style="float:right">7AM-12PM</p>
+          <p><strong>Tuesday</strong></p>
+        </div>
+        <div class="Wednesday" style="padding:10px">
+          <p style="float:right">7AM-12PM</p>
+          <p><strong>Wednesday</strong></p>
+        </div>
+        <div class="Thursday" style="padding:10px">
+          <p style="float:right">7AM-12PM</p>
+          <p><strong>Thursday</strong></p>
+        </div>
+        <div class="Friday" style="padding:10px">
+          <p style="float:right">7AM-12PM</p>
+          <p><strong>Friday</strong></p>
+        </div>
+        <div class="Saturday" style="padding:10px">
+          <p style="float:right">7AM-12PM</p>
+          <p><strong>Saturday</strong></p>
+        </div>
+        <div class="Sunday" style="padding:10px">
+          <p style="float:right">7AM-12PM</p>
+          <p><strong>Sunday</strong></p>
+        </div>
+      </div>
+    </div>
+
+      {% for r in rock %}
+        <div class="machines" style="height:100%; width:75%; margin-top:20px">
+            <span style="float:left">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXssMZB6SsfsPqpyQ9gIserw8xYUEEIogVdw&usqp=CAU">
+                <p style="margin-left:60px; font-weight:50px">{{ r.washerName }}     {{ r.status}}</p>
+            </span>
+        </div>
+      {% endfor %}
+
+  </body>
+</html>
